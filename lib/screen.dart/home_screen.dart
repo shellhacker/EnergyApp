@@ -12,18 +12,27 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authController = Provider.of<AuthController>(context, listen: false);
+    final Controller = Provider.of<HomeController>(context, listen: false);
     final size = MediaQuery.of(context).size;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final authController =
-          Provider.of<HomeController>(context, listen: false);
-      authController.fecthData(
+      Controller.fecthData(
         context,
       );
     });
     return Scaffold(
         drawer: SizedBox(),
         appBar: AppBar(
-          actions: [Icon(Icons.settings)],
+          actions: [
+            GestureDetector(
+              child: Icon(Icons.settings),
+              onTap: () {
+                authController.signout();
+                authController.clearLocalData();
+                Routes.pushreplace(screen: LoginScreen());
+              },
+            )
+          ],
           centerTitle: true,
           title: Text("Reports"),
         ),

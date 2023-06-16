@@ -18,13 +18,7 @@ class AuthController extends ChangeNotifier {
   final passwordController = TextEditingController();
 
   String? dropdowmValue;
-  List<String> dropdwonList = [
-    "ZONE 1",
-    "ZONE 2",
-    "ZONE 3",
-    "ZONE 4",
-    "ZONE 5"
-  ];
+  List<String> dropdwonList = ["NO1", "NO2", "NO3", "NO4", "NO5"];
 
   changeDropDownValue(value) {
     dropdowmValue = value;
@@ -50,6 +44,10 @@ class AuthController extends ChangeNotifier {
       loader = false;
       notifyListeners();
     }
+  }
+
+  signout() async {
+    await fb.signOut();
   }
 
   saveAuthLocal() async {
